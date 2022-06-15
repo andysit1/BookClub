@@ -1,0 +1,45 @@
+{% extends 'main.html' %}
+
+{% block content %}  
+
+ 
+<style>
+    .home-container{
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+    }
+</style>
+
+<div class="home-container">
+    <div>
+        <h3>Year Read</h3>
+        <hr>
+    
+        <div>
+            <a href="{% url 'home' %}">All</a>
+        </div>
+
+        <div>
+            {% for year in years %}
+            <div>
+                <a href="{% url 'home' %}?q={{year}}">{{year}}</a>
+            </div>
+            {% endfor %}
+        </div>
+    
+    </div>
+
+    <div>
+        <h3>Book Log</h3>
+            {% for slot in slots %}
+            <div>
+                <a href="{%url 'room' slot.id %}">{{slot.book}}</a>
+                <hr>
+            </div>
+            {% endfor %}
+    </div>
+
+</div>
+
+
+{% endblock content %} 
