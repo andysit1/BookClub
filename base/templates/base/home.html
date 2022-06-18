@@ -12,7 +12,7 @@
 
 <div class="home-container">
     <div>
-        <h3>Year Read</h3>
+        <h3>Year</h3>
         <hr>
     
         <div>
@@ -31,12 +31,15 @@
 
     <div>
         <h3>Book Log</h3>
+            <a href="{% url 'select-book' %}">Add Book</a>
+            <hr>
             {% for slot in slots %}
             <div>
                 <a href="{%url 'room' slot.id %}">{{slot.book}}</a>
                 <hr>
             </div>
             {% endfor %}
+            
     </div>
 
 </div>

@@ -1,0 +1,33 @@
+{% extends 'main.html' %}
+
+
+{% block content %}  
+<h3>Find Book Here!</h3>
+
+<style>
+    .book-container{
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+    }
+</style>
+
+
+<div class="book-container">
+    <div>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <input type="text" name='book_name' placeholder="book name..."/>
+            <input type="submit"  value="Submit"/>
+        </form>
+    </div>
+    
+    <div>
+        {% for book in books %}
+            <div>
+                <a href="{% url 'add-book' book.id %}">{{book.volumeInfo.title}}</a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}  

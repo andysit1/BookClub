@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+
+{% block content %}  
+
+<h1>Books will be inputed here!</h1>
+
+<div>
+    <p>{{book.volumeInfo.title}}</p>
+    {% for author in book.volumeInfo.authors %}
+        <li>{{author}}</li>
+    {% endfor %}
+</div>
+
+<div>
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+
+{% endblock content %}
+
+
+
