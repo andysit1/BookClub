@@ -1,7 +1,7 @@
 {% extends 'main.html' %}
 
 
-{% block content %}  
+{% block content %}
 
 <style>
     .blog-container{
@@ -26,11 +26,13 @@
         <h3>Blog Log!</h3>
 
         {% for blog in blogs %}
+        {% if request.user == room.host %}
         <a href="{% url 'edit-blog' blog.id %}">Edit</a> <a>Remove</a>
-        <p>{{blog.user}} - {{blog.updated}}</p>    
+        {% endif %}
+        <p>{{blog.user}} - {{blog.updated}}</p>
         <p>{{blog.body}}</p>
         <hr>
-        {% endfor %}  
+        {% endfor %}
 
         <div class="entry-container">
             <a href="{% url 'add-blog' slot.id %}">Add Entry</a>
@@ -41,4 +43,4 @@
 
 
 
-{% endblock content %}  
+{% endblock content %}

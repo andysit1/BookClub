@@ -12,4 +12,4 @@ class BlogForm(ModelForm):
 class SlotForm(ModelForm):
     class Meta:
         model = Slot
-        fields = '__all__'
+        fields = ['host', 'book_id', 'title']

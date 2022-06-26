@@ -1,8 +1,8 @@
 {% extends 'main.html' %}
 
-{% block content %}  
+{% block content %}
 
- 
+
 <style>
     .home-container{
         display: grid;
@@ -14,7 +14,7 @@
     <div>
         <h3>Year</h3>
         <hr>
-    
+
         <div>
             <a href="{% url 'home' %}">All</a>
         </div>
@@ -26,7 +26,7 @@
             </div>
             {% endfor %}
         </div>
-    
+
     </div>
 
     <div>
@@ -35,14 +35,16 @@
             <hr>
             {% for slot in slots %}
             <div>
-                <a href="{%url 'room' slot.id %}">{{slot.book}}</a>
+                <span>@{{slot.host}}</span>
+                <a href="{%url 'room' slot.id %}">{{slot.title}}</a>
+                <small>{{slot.description}}</small>
                 <hr>
             </div>
             {% endfor %}
-            
+
     </div>
 
 </div>
 
 
-{% endblock content %} 
+{% endblock content %}
