@@ -35,7 +35,10 @@
             <hr>
             {% for slot in slots %}
             <div>
-                <span>@{{slot.host}}</span>
+                <small>@{{slot.host}}</small>
+                {% if request.user == slot.host %}
+                <a href="{% url 'delete' slot.id %}">delete</a>
+                {% endif %}
                 <a href="{%url 'room' slot.id %}">{{slot.title}}</a>
                 <small>{{slot.description}}</small>
                 <hr>

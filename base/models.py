@@ -1,5 +1,3 @@
-from configparser import MAX_INTERPOLATION_DEPTH
-from msilib.schema import Property
 from django.db import models
 from django.contrib.auth.models import User
 from matplotlib.pyplot import title
@@ -19,7 +17,7 @@ class Slot(models.Model):
 
     #fill after scrap
     title = models.TextField(blank=True, null=True)
-    
+
     updated = models.DateTimeField(auto_now=True) #when affected
     created = models.DateTimeField(auto_now_add=True) #intial time
 
