@@ -1,0 +1,17 @@
+<div class="topics">
+  <div class="topics__header">
+    <h3>Year</h3>
+    <hr>
+
+    <div>
+        <a href="{% url 'home' %}">All</a>
+    </div>
+  </div>
+  <ul class="topics__list">
+    {% for year in years %}
+    <div>
+        <a href="{% url 'home' %}?q={{year}}">{{year}}</a>
+    </div>
+    {% endfor %}
+  </ul>
+</div>

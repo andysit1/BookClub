@@ -47,39 +47,39 @@ def loginPage(request):
     context = {'page':page}
     return render(request, 'base/login_register.html', context)
 
-
-
 def logoutPage(request):
     logout(request)
     return redirect('login')
 
-
 def registerPage(request):
     page = 'register'
-    form = UserCreationForm()
 
+    form = UserCreationForm()
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
+            print('valid')
             user = form.save(commit=False)
             user.username = user.username.lower()
             user.save()
             login(request, user)
             return redirect('home')
         else:
+            print(form.errors)
             messages.error(request, 'An error occured during sign up.')
-
     context = {'form':form, 'page':page}
     return render(request, 'base/login_register.html', context)
 
 
-
 def homeView(request):
     slots = Slot.objects.all()
+    blogs = Blog.objects.all()
+
     print(slots)
-    context = {'slots':slots}
+
+    context = {'slots':slots, 'blogs':blogs}
     return render(request, 'base/home.html', context)
-    
+
 
 @login_required(login_url='/login')
 def roomView(request, pk):
@@ -122,7 +122,9 @@ def addBlog(request, pk):
     if request.method == 'POST':
         form = BlogForm(request.POST)
         if form.is_valid():
-            form.save()
+            room = form.save(commit=False)
+            room.user = request.user
+            room.save()
             return redirect('home')
 
     context = {'form':form}
