@@ -17,6 +17,7 @@ class Slot(models.Model):
 
     #fill after scrap
     title = models.TextField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
 
     updated = models.DateTimeField(auto_now=True) #when affected
     created = models.DateTimeField(auto_now_add=True) #intial time

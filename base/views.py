@@ -17,7 +17,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 #GET https://www.googleapis.com/books/v1/volumes?q={search terms}
 
-
 #login/Logout ---
 
 def loginPage(request):
@@ -70,16 +69,15 @@ def registerPage(request):
     context = {'form':form, 'page':page}
     return render(request, 'base/login_register.html', context)
 
-
 def homeView(request):
     slots = Slot.objects.all()
-    blogs = Blog.objects.all()
-
-    print(slots)
-
-    context = {'slots':slots, 'blogs':blogs}
+    blogs = Blog.objects.all()[:4]
+    years = []
+    for slot in slots:
+        if  slot.created.year not in years:
+            years.append(slot.created.year)
+    context = {'slots':slots, 'blogs':blogs, 'years':years}
     return render(request, 'base/home.html', context)
-
 
 @login_required(login_url='/login')
 def roomView(request, pk):
@@ -131,7 +129,8 @@ def addBlog(request, pk):
 
     return render(request, 'base/blog/add_blog.html', context)
 
-from package import r_id_scrap, get_data
+
+from package import *
 
 @login_required(login_url='/login')
 def addBook(request, pk):
@@ -142,12 +141,14 @@ def addBook(request, pk):
 
     info = get_data('data')
     title = info.get('title')
-
+    desc = html_cleaned_data(info.get('description'))
     initial = {
         'host': request.user,
         'book_id': pk,
-        'title':title
+        'title':title,
+        'description':desc
     }
+
     form = SlotForm(initial=initial)
 
     if request.method == "POST":
@@ -171,7 +172,6 @@ def deleteBook(request, pk):
         return redirect('home')
     return render(request, 'base/book/delete_book.html', context)
 
-from package import r_scrap
 
 
 @login_required(login_url='/login')

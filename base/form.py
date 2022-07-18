@@ -13,4 +13,4 @@ class BlogForm(ModelForm):
 class SlotForm(ModelForm):
     class Meta:
         model = Slot
-        fields = ['host', 'book_id', 'title']
+        fields = ['host', 'book_id', 'title', 'description']

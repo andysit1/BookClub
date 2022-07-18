@@ -1,25 +1,25 @@
 {% load static %}
 
-{% for slot in slots %}
+{% for blog in blogs %}
 <div class="roomListRoom">
   <div class="roomListRoom__header">
     <a href="{%url 'room' slot.id %}" class="roomListRoom__author">
       <div class="avatar avatar--small">
         <img src="{% static 'images/profile.png' %}" />
       </div>
-      <span>@{{slot.host}}</span>
+      <span>@{{blog.user}}</span>
     </a>
     <div class="roomListRoom__actions">
-      <span>{{slot.created|timesince}} ago</span>
+      <span>{{blog.updated|timesince}} ago</span>
     </div>
   </div>
   <div class="roomListRoom__content">
-    <a href="{%url 'room' slot.id %}">{{slot.title}}</a>
     <p>
-      {{slot.description|truncatechars:250 }}
+      {{blog.body}}
     </p>
   </div>
   <div class="roomListRoom__meta">
+    <!-- potential for comnmenting/liking -->
   </div>
 </div>
 {% endfor %}

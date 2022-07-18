@@ -1,4 +1,5 @@
 import json
+from os import remove
 from urllib import response
 import urllib.request
 from attr import dataclass
@@ -32,4 +33,9 @@ def get_data(fname):
     return d
 
 
-
+#found this from... https://medium.com/@jorlugaqui/how-to-strip-html-tags-from-a-string-in-python-7cb81a2bbf44
+def html_cleaned_data(text):
+    """Remove html tags from a string"""
+    import re
+    clean = re.compile('<.*?>')
+    return re.sub(clean, '', text)
